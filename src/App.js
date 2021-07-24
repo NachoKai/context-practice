@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, createContext } from "react";
+import "./App.css";
+import Component1 from "./components/Component1";
 
-function App() {
+export const CountContext = createContext(0);
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CountContext.Provider value={{ count, setCount }}>
+      <div className="App">
+        <Component1 />
+        <div className="buttons">
+          <button className="button" onClick={() => setCount(count - 1)}>
+            -
+          </button>
+          <button className="button" onClick={() => setCount(count + 1)}>
+            +
+          </button>
+        </div>
+      </div>
+    </CountContext.Provider>
   );
 }
-
-export default App;
